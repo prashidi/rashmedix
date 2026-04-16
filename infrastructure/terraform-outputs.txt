@@ -1,0 +1,9 @@
+ecr_backend_uri = "437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend"
+ecr_frontend_uri = "437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/frontend"
+eks_cluster_certificate_authority_data = <sensitive>
+eks_cluster_endpoint = "https://CB2D6E48CAF0F901BAA62BD44AB717BE.gr7.eu-west-1.eks.amazonaws.com"
+eks_cluster_name = "rashmedix-cluster"
+rds_endpoint = "rashmedix-postgres.cyzpdabyec7v.eu-west-1.rds.amazonaws.com"
+rds_port = 5432
+secrets_manager_arn = "arn:aws:secretsmanager:eu-west-1:437932913013:secret:rashmedix/db-password-kuNcT7"
+vpc_id = "vpc-038bb52797e1f25c6"

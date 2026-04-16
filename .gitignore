@@ -28,3 +28,6 @@ dist/
 # Virtual environments
 venv/
 .venv/
+infrastructure/terraform/terraform.tfvars
+infrastructure/terraform/.terraform/
+infrastructure/terraform/*.tfstate*

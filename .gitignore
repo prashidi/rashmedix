@@ -24,3 +24,7 @@ dist/
 # IDE
 .vscode/
 .idea/
+
+# Virtual environments
+venv/
+.venv/

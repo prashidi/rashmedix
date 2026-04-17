@@ -1,0 +1,236 @@
+2026-04-17T21:35:22Z	INFO	[vulndb] Need to update DB
+2026-04-17T21:35:22Z	INFO	[vulndb] Downloading vulnerability DB...
+2026-04-17T21:35:22Z	INFO	[vulndb] Downloading artifact...	repo="mirror.gcr.io/aquasec/trivy-db:2"
+9.56 MiB / 90.40 MiB [------>_______________________________________________________] 10.58% ? p/s ?22.11 MiB / 90.40 MiB [-------------->______________________________________________] 24.46% ? p/s ?34.69 MiB / 90.40 MiB [----------------------->_____________________________________] 38.37% ? p/s ?47.28 MiB / 90.40 MiB [------------------------->______________________] 52.30% 62.79 MiB p/s ETA 0s59.86 MiB / 90.40 MiB [------------------------------->________________] 66.21% 62.79 MiB p/s ETA 0s72.45 MiB / 90.40 MiB [-------------------------------------->_________] 80.14% 62.79 MiB p/s ETA 0s84.83 MiB / 90.40 MiB [--------------------------------------------->__] 93.83% 62.79 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 62.79 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 62.79 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 59.33 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 59.33 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 59.33 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 55.51 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 55.51 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 55.51 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 51.92 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 51.92 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 51.92 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 48.57 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [-------------------------------------------------] 100.00% 24.29 MiB p/s 3.9s2026-04-17T21:35:26Z	INFO	[vulndb] Artifact successfully downloaded	repo="mirror.gcr.io/aquasec/trivy-db:2"
+2026-04-17T21:35:26Z	INFO	[vuln] Vulnerability scanning is enabled
+2026-04-17T21:35:26Z	INFO	[secret] Secret scanning is enabled
+2026-04-17T21:35:26Z	INFO	[secret] If your scanning is slow, please try '--scanners vuln' to disable secret scanning
+2026-04-17T21:35:26Z	INFO	[secret] Please see https://trivy.dev/docs/v0.70/guide/scanner/secret#recommendation for faster secret detection
+2026-04-17T21:35:34Z	INFO	[python] Licenses acquired from one or more METADATA files may be subject to additional terms. Use `--debug` flag to see all affected packages.
+2026-04-17T21:35:34Z	INFO	Detected OS	family="debian" version="13.4"
+2026-04-17T21:35:34Z	INFO	[debian] Detecting vulnerabilities...	os_version="13" pkg_num=140
+2026-04-17T21:35:34Z	INFO	Number of language-specific files	num=1
+2026-04-17T21:35:34Z	INFO	[python-pkg] Detecting vulnerabilities...
+2026-04-17T21:35:34Z	WARN	Using severities from other vendors for some vulnerabilities. Read https://trivy.dev/docs/v0.70/guide/scanner/vulnerability#severity-selection for details.
+
+Report Summary
+
+┌──────────────────────────────────────────────────────────────────────────────────┬────────────┬─────────────────┬─────────┐
+│                                      Target                                      │    Type    │ Vulnerabilities │ Secrets │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1 (debian 13.4)  │   debian   │       48        │    -    │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ usr/local/lib/python3.12/site-packages/asgiref-3.11.1.dist-info/METADATA         │ python-pkg │        0        │    -    │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ usr/local/lib/python3.12/site-packages/django-6.0.4.dist-info/METADATA           │ python-pkg │        0        │    -    │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ usr/local/lib/python3.12/site-packages/django_cors_headers-4.9.0.dist-info/META- │ python-pkg │        0        │    -    │
+│ DATA                                                                             │            │                 │         │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ usr/local/lib/python3.12/site-packages/djangorestframework-3.17.1.dist-info/MET- │ python-pkg │        0        │    -    │
+│ ADATA                                                                            │            │                 │         │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ usr/local/lib/python3.12/site-packages/gunicorn-25.3.0.dist-info/METADATA        │ python-pkg │        0        │    -    │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ usr/local/lib/python3.12/site-packages/packaging-26.1.dist-info/METADATA         │ python-pkg │        0        │    -    │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ usr/local/lib/python3.12/site-packages/pip-25.0.1.dist-info/METADATA             │ python-pkg │        0        │    -    │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ usr/local/lib/python3.12/site-packages/psycopg2_binary-2.9.11.dist-info/METADATA │ python-pkg │        0        │    -    │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ usr/local/lib/python3.12/site-packages/python_decouple-3.8.dist-info/METADATA    │ python-pkg │        0        │    -    │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ usr/local/lib/python3.12/site-packages/sqlparse-0.5.5.dist-info/METADATA         │ python-pkg │        0        │    -    │
+└──────────────────────────────────────────────────────────────────────────────────┴────────────┴─────────────────┴─────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+
+437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1 (debian 13.4)
+===============================================================================
+Total: 48 (HIGH: 48, CRITICAL: 0)
+
+┌────────────────┬────────────────┬──────────┬──────────┬───────────────────┬───────────────┬──────────────────────────────────────────────────────────────┐
+│    Library     │ Vulnerability  │ Severity │  Status  │ Installed Version │ Fixed Version │                            Title                             │
+├────────────────┼────────────────┼──────────┼──────────┼───────────────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+│ libncursesw6   │ CVE-2025-69720 │ HIGH     │ affected │ 6.5+20250216-2    │               │ ncurses: ncurses: Buffer overflow vulnerability may lead to  │
+│                │                │          │          │                   │               │ arbitrary code execution.                                    │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-69720                   │
+├────────────────┼────────────────┤          │          ├───────────────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+│ libsystemd0    │ CVE-2026-29111 │          │          │ 257.9-1~deb13u1   │               │ systemd: systemd: Arbitrary code execution or Denial of      │
+│                │                │          │          │                   │               │ Service via spurious IPC...                                  │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-29111                   │
+├────────────────┼────────────────┤          │          ├───────────────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+│ libtinfo6      │ CVE-2025-69720 │          │          │ 6.5+20250216-2    │               │ ncurses: ncurses: Buffer overflow vulnerability may lead to  │
+│                │                │          │          │                   │               │ arbitrary code execution.                                    │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-69720                   │
+├────────────────┼────────────────┤          │          ├───────────────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+│ libudev1       │ CVE-2026-29111 │          │          │ 257.9-1~deb13u1   │               │ systemd: systemd: Arbitrary code execution or Denial of      │
+│                │                │          │          │                   │               │ Service via spurious IPC...                                  │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-29111                   │
+├────────────────┼────────────────┤          │          ├───────────────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+│ linux-libc-dev │ CVE-2013-7445  │          │          │ 6.12.74-2         │               │ kernel: memory exhaustion via crafted Graphics Execution     │
+│                │                │          │          │                   │               │ Manager (GEM) objects                                        │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2013-7445                    │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2019-19449 │          │          │                   │               │ kernel: mounting a crafted f2fs filesystem image can lead to │
+│                │                │          │          │                   │               │ slab-out-of-bounds read...                                   │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2019-19449                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2019-19814 │          │          │                   │               │ kernel: out-of-bounds write in __remove_dirty_segment in     │
+│                │                │          │          │                   │               │ fs/f2fs/segment.c                                            │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2019-19814                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2021-3847  │          │          │                   │               │ kernel: low-privileged user privileges escalation            │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2021-3847                    │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2021-3864  │          │          │                   │               │ kernel: descendant's dumpable setting with certain SUID      │
+│                │                │          │          │                   │               │ binaries                                                     │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2021-3864                    │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2024-21803 │          │          │                   │               │ kernel: bluetooth: use-after-free vulnerability in           │
+│                │                │          │          │                   │               │ af_bluetooth.c                                               │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2024-21803                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2024-58015 │          │          │                   │               │ kernel: wifi: ath12k: Fix for out-of bound access error      │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2024-58015                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2024-58093 │          │          │                   │               │ kernel: Linux kernel: PCI/ASPM use-after-free during         │
+│                │                │          │          │                   │               │ hot-unplug                                                   │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2024-58093                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-22104 │          │          │                   │               │ kernel: ibmvnic: Use kernel helpers for hex dumps            │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-22104                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-38137 │          │          │                   │               │ kernel: PCI/pwrctrl: Cancel outstanding rescan work when     │
+│                │                │          │          │                   │               │ unregistering                                                │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-38137                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-38187 │          │          │                   │               │ kernel: drm/nouveau: fix a use-after-free in                 │
+│                │                │          │          │                   │               │ r535_gsp_rpc_push()                                          │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-38187                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-38204 │          │          │                   │               │ kernel: jfs: fix array-index-out-of-bounds read in           │
+│                │                │          │          │                   │               │ add_missing_indices                                          │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-38204                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-38206 │          │          │                   │               │ kernel: Kernel: Double free vulnerability in exFAT           │
+│                │                │          │          │                   │               │ filesystem can lead to denial...                             │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-38206                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-38421 │          │          │                   │               │ kernel: platform/x86/amd: pmf: Use device managed            │
+│                │                │          │          │                   │               │ allocations                                                  │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-38421                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-38584 │          │          │                   │               │ kernel: padata: Fix pd UAF once and for all                  │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-38584                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-38627 │          │          │                   │               │ kernel: f2fs: compress: fix UAF of f2fs_inode_info in        │
+│                │                │          │          │                   │               │ f2fs_free_dic                                                │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-38627                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-38636 │          │          │                   │               │ kernel: rv: Use strings in da monitors tracepoints           │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-38636                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-39859 │          │          │                   │               │ kernel: ptp: ocp: fix use-after-free bugs causing by         │
+│                │                │          │          │                   │               │ ptp_ocp_watchdog                                             │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-39859                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-39862 │          │          │                   │               │ kernel: wifi: mt76: mt7915: fix list corruption after        │
+│                │                │          │          │                   │               │ hardware restart                                             │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-39862                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-39958 │          │          │                   │               │ kernel: iommu/s390: Make attach succeed when the device was  │
+│                │                │          │          │                   │               │ surprise removed                                             │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-39958                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-40064 │          │          │                   │               │ kernel: smc: Fix use-after-free in __pnet_find_base_ndev()   │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-40064                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-40135 │          │          │                   │               │ kernel: ipv6: use RCU in ip6_xmit()                          │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-40135                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-40158 │          │          │                   │               │ kernel: ipv6: use RCU in ip6_output()                        │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-40158                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-40168 │          │          │                   │               │ kernel: smc: Use __sk_dst_get() and dst_dev_rcu() in         │
+│                │                │          │          │                   │               │ smc_clc_prfx_match()                                         │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-40168                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-71152 │          │          │                   │               │ kernel: net: dsa: properly keep track of conduit reference   │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-71152                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2025-71221 │          │          │                   │               │ kernel: dmaengine: mmp_pdma: Fix race condition in           │
+│                │                │          │          │                   │               │ mmp_pdma_residue()                                           │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-71221                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-23102 │          │          │                   │               │ kernel: Linux kernel: Denial of Service due to incorrect SVE │
+│                │                │          │          │                   │               │ context restoration...                                       │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-23102                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-23171 │          │          │                   │               │ kernel: Linux kernel: Use-after-free in bonding module can   │
+│                │                │          │          │                   │               │ cause system crash or...                                     │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-23171                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-23208 │          │          │                   │               │ kernel: ALSA: usb-audio: Prevent excessive number of frames  │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-23208                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-23226 │          │          │                   │               │ kernel: ksmbd: add chann_lock to protect ksmbd_chann_list    │
+│                │                │          │          │                   │               │ xarray                                                       │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-23226                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-23227 │          │          │                   │               │ kernel: drm/exynos: vidi: use ctx->lock to protect struct    │
+│                │                │          │          │                   │               │ vidi_context member variables related...                     │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-23227                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-23231 │          │          │                   │               │ kernel: kernel: Privilege escalation or denial of service    │
+│                │                │          │          │                   │               │ via use-after-free in nf_tables_addchain()...                │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-23231                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-23243 │          │          │                   │               │ kernel: Linux kernel: Denial of service and memory           │
+│                │                │          │          │                   │               │ corruption in RDMA umad...                                   │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-23243                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-23270 │          │          │                   │               │ kernel: Linux kernel: Use-after-free in traffic control      │
+│                │                │          │          │                   │               │ (act_ct) may lead to denial...                               │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-23270                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-23375 │          │          │                   │               │ kernel: mm: thp: deny THP for files on anonymous inodes      │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-23375                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-23392 │          │          │                   │               │ kernel: netfilter: nf_tables: release flowtable after rcu    │
+│                │                │          │          │                   │               │ grace period on error                                        │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-23392                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-23401 │          │          │                   │               │ kernel: KVM: x86/mmu: Drop/zap existing present SPTE even    │
+│                │                │          │          │                   │               │ when creating an MMIO...                                     │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-23401                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-23455 │          │          │                   │               │ kernel: netfilter: nf_conntrack_h323: check for zero length  │
+│                │                │          │          │                   │               │ in DecodeQ931()                                              │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-23455                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-31402 │          │          │                   │               │ kernel: nfsd: fix heap overflow in NFSv4.0 LOCK replay cache │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-31402                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-31408 │          │          │                   │               │ kernel: Bluetooth: SCO: Fix use-after-free in                │
+│                │                │          │          │                   │               │ sco_recv_frame() due to missing sock_hold                    │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-31408                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-31411 │          │          │                   │               │ kernel: net: atm: fix crash due to unvalidated vcc pointer   │
+│                │                │          │          │                   │               │ in sigd_send()...                                            │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-31411                   │
+│                ├────────────────┤          │          │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                │ CVE-2026-31419 │          │          │                   │               │ kernel: Linux kernel: Use-after-free in bonding driver leads │
+│                │                │          │          │                   │               │ to denial of service...                                      │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-31419                   │
+├────────────────┼────────────────┤          │          ├───────────────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+│ ncurses-base   │ CVE-2025-69720 │          │          │ 6.5+20250216-2    │               │ ncurses: ncurses: Buffer overflow vulnerability may lead to  │
+│                │                │          │          │                   │               │ arbitrary code execution.                                    │
+│                │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-69720                   │
+├────────────────┤                │          │          │                   ├───────────────┤                                                              │
+│ ncurses-bin    │                │          │          │                   │               │                                                              │
+│                │                │          │          │                   │               │                                                              │
+│                │                │          │          │                   │               │                                                              │
+└────────────────┴────────────────┴──────────┴──────────┴───────────────────┴───────────────┴──────────────────────────────────────────────────────────────┘

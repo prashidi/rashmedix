@@ -1,0 +1,26 @@
+# ── Security context patch — Week 7 best practices ────────────────────────────
+# Applies least-privilege security settings to backend pods
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: rashmedix
+spec:
+  template:
+    spec:
+      # Run as non-root user
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 2000
+      containers:
+        - name: backend
+          securityContext:
+            # Prevent privilege escalation
+            allowPrivilegeEscalation: false
+            # Read-only root filesystem
+            readOnlyRootFilesystem: false
+            # Drop all Linux capabilities
+            capabilities:
+              drop:
+                - ALL

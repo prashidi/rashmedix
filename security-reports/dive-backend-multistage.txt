@@ -1,0 +1,49 @@
+  Using default CI config
+[1mImage Source: [0mdocker://rashmedix-backend-local:v1
+[1mExtracting image from docker-engine...[0m (this can take a while for large images)
+[1mAnalyzing image...[0m
+  efficiency: 97.9691 %
+  wastedBytes: 7091221 bytes (7.1 MB)
+  userWastedPercent: 4.3518 %
+[1mInefficient Files:[0m
+Count  Wasted Space  File Path
+    4        3.2 MB  /var/cache/debconf/templates.dat
+    3        2.4 MB  /var/cache/debconf/templates.dat-old
+    4        305 kB  /var/lib/dpkg/status
+    4        305 kB  /var/lib/dpkg/status-old
+    3        250 kB  /var/log/dpkg.log
+    2        140 kB  /var/lib/apt/lists/deb.debian.org_debian_dists_trixie_InRelease
+    3         95 kB  /var/log/apt/term.log
+    2         84 kB  /var/lib/dpkg/info/perl-base.list
+    4         55 kB  /var/cache/debconf/config.dat
+    2         47 kB  /var/lib/apt/lists/deb.debian.org_debian_dists_trixie-updates_InRelease
+    2         43 kB  /var/lib/apt/lists/deb.debian.org_debian-security_dists_trixie-security_InRelease
+    3         38 kB  /var/cache/debconf/config.dat-old
+    3         22 kB  /var/log/apt/history.log
+    3         20 kB  /var/log/apt/eipp.log.xz
+    4         18 kB  /var/lib/apt/extended_states
+    3         15 kB  /etc/ld.so.cache
+    2         11 kB  /app/inventory/__pycache__/models.cpython-312.pyc
+    2         10 kB  /var/cache/ldconfig/aux-cache
+    2         920 B  /var/lib/dpkg/diversions
+    2         801 B  /app/inventory/__pycache__/admin.cpython-312.pyc
+    2         732 B  /var/lib/dpkg/diversions-old
+    2         348 B  /var/lib/dpkg/triggers/File
+    2           0 B  /var/cache/apt/archives/lock
+    2           0 B  /var/lib/apt/lists/partial
+    2           0 B  /var/lib/dpkg/triggers/Unincorp
+    4           0 B  /var/lib/dpkg/triggers/Lock
+    2           0 B  /tmp
+    2           0 B  /var/lib/dpkg/updates
+    4           0 B  /var/lib/dpkg/lock
+    2           0 B  /var/cache/apt/archives/partial
+    2           0 B  /var/lib/apt/lists/lock
+    2           0 B  /var/cache/debconf/passwords.dat
+    2           0 B  /var/lib/dpkg/lock-frontend
+    2           0 B  /var/lib/apt/lists/auxfiles
+[1mResults:[0m
+  PASS: highestUserWastedPercent
+  [34mSKIP[0m: highestWastedBytes: rule disabled
+  PASS: lowestEfficiency
+[32mResult:PASS [Total:3] [Passed:2] [Failed:0] [Warn:0] [Skipped:1][0m
+

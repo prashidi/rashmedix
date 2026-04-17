@@ -111,3 +111,28 @@ jobs:
       - name: Print image URI
         run: |
           echo "Image pushed: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}"
+
+  dive-analysis:
+    name: Dive Image Analysis
+    runs-on: ubuntu-latest
+    needs: build-scan-push
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Run Dive image efficiency check
+        run: |
+          docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -e CI=true \
+            wagoodman/dive:latest \
+            ${{ steps.login-ecr.outputs.registry }}/rashmedix/backend:v1

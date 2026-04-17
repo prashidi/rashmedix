@@ -1,0 +1,69 @@
+  Using default CI config
+[1mImage Source: [0mdocker://437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+[1mExtracting image from docker-engine...[0m (this can take a while for large images)
+[1mAnalyzing image...[0m
+  efficiency: 96.5537 %
+  wastedBytes: 24978001 bytes (25 MB)
+  userWastedPercent: 7.6670 %
+[1mInefficient Files:[0m
+Count  Wasted Space  File Path
+    2         13 MB  /usr/lib/x86_64-linux-gnu/libcrypto.so.3
+    3        2.4 MB  /var/cache/debconf/templates.dat-old
+    3        2.4 MB  /var/cache/debconf/templates.dat
+    2        2.2 MB  /usr/lib/x86_64-linux-gnu/libssl.so.3
+    2        2.2 MB  /usr/bin/openssl
+    2        549 kB  /var/lib/dpkg/info/libssl3t64:amd64.symbols
+    4        339 kB  /var/lib/dpkg/status
+    4        339 kB  /var/lib/dpkg/status-old
+    2        282 kB  /usr/lib/x86_64-linux-gnu/ossl-modules/legacy.so
+    3        274 kB  /var/log/dpkg.log
+    2        140 kB  /var/lib/apt/lists/deb.debian.org_debian_dists_trixie_InRelease
+    3        106 kB  /var/log/apt/term.log
+    2        104 kB  /usr/lib/x86_64-linux-gnu/engines-3/loader_attic.so
+    2         83 kB  /var/lib/dpkg/info/perl-base.list
+    2         53 kB  /usr/lib/x86_64-linux-gnu/engines-3/padlock.so
+    2         47 kB  /var/lib/apt/lists/deb.debian.org_debian_dists_trixie-updates_InRelease
+    2         46 kB  /usr/lib/x86_64-linux-gnu/engines-3/afalg.so
+    2         43 kB  /var/lib/apt/lists/deb.debian.org_debian-security_dists_trixie-security_InRelease
+    3         38 kB  /var/cache/debconf/config.dat
+    3         38 kB  /var/cache/debconf/config.dat-old
+    2         37 kB  /var/lib/dpkg/info/openssl.md5sums
+    2         33 kB  /var/lib/dpkg/info/openssl.list
+    2         27 kB  /usr/lib/ssl/misc/CA.pl
+    3         24 kB  /var/log/apt/history.log
+    3         22 kB  /var/log/apt/eipp.log.xz
+    4         20 kB  /var/lib/apt/extended_states
+    3         16 kB  /etc/ld.so.cache
+    2         14 kB  /usr/bin/c_rehash
+    2         14 kB  /usr/lib/ssl/misc/tsget.pl
+    2         11 kB  /var/cache/ldconfig/aux-cache
+    2        8.2 kB  /var/log/alternatives.log
+    2        5.1 kB  /usr/share/doc/libssl3t64/copyright
+    2        5.1 kB  /usr/share/doc/openssl/copyright
+    2        5.1 kB  /usr/share/doc/openssl-provider-legacy/copyright
+    2        1.5 kB  /var/lib/dpkg/info/libssl3t64:amd64.md5sums
+    2        1.2 kB  /var/lib/dpkg/info/libssl3t64:amd64.list
+    2         836 B  /var/lib/dpkg/diversions
+    2         712 B  /var/lib/dpkg/info/openssl-provider-legacy.list
+    2         682 B  /var/lib/dpkg/info/openssl-provider-legacy.md5sums
+    2         648 B  /var/lib/dpkg/diversions-old
+    2         298 B  /var/lib/dpkg/info/libssl3t64:amd64.shlibs
+    2         288 B  /var/lib/dpkg/triggers/File
+    2         240 B  /var/lib/dpkg/info/openssl.postinst
+    2         136 B  /var/lib/dpkg/info/libssl3t64:amd64.triggers
+    2          42 B  /var/lib/dpkg/info/openssl.conffiles
+    2           0 B  /usr/lib/ssl/cert.pem
+    4           0 B  /var/lib/dpkg/triggers/Lock
+    2           0 B  /usr/lib/ssl/misc/tsget
+    2           0 B  /usr/lib/ssl/openssl.cnf
+    4           0 B  /var/lib/dpkg/lock
+    2           0 B  /var/lib/apt/lists/partial
+    2           0 B  /var/lib/apt/lists/lock
+    2           0 B  /var/lib/apt/lists/auxfiles
+    2           0 B  /var/lib/dpkg/triggers/Unincorp
+[1mResults:[0m
+  PASS: highestUserWastedPercent
+  [34mSKIP[0m: highestWastedBytes: rule disabled
+  PASS: lowestEfficiency
+[32mResult:PASS [Total:3] [Passed:2] [Failed:0] [Warn:0] [Skipped:1][0m
+

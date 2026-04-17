@@ -1,0 +1,24 @@
+2026-04-17T21:35:37Z	INFO	[vulndb] Need to update DB
+2026-04-17T21:35:37Z	INFO	[vulndb] Downloading vulnerability DB...
+2026-04-17T21:35:37Z	INFO	[vulndb] Downloading artifact...	repo="mirror.gcr.io/aquasec/trivy-db:2"
+10.33 MiB / 90.40 MiB [------>______________________________________________________] 11.42% ? p/s ?22.62 MiB / 90.40 MiB [--------------->_____________________________________________] 25.03% ? p/s ?35.37 MiB / 90.40 MiB [----------------------->_____________________________________] 39.13% ? p/s ?47.89 MiB / 90.40 MiB [------------------------->______________________] 52.97% 62.61 MiB p/s ETA 0s60.44 MiB / 90.40 MiB [-------------------------------->_______________] 66.85% 62.61 MiB p/s ETA 0s64.53 MiB / 90.40 MiB [---------------------------------->_____________] 71.38% 62.61 MiB p/s ETA 0s78.11 MiB / 90.40 MiB [----------------------------------------->______] 86.40% 61.82 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 61.82 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 61.82 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 59.14 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 59.14 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 59.14 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 55.33 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 55.33 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 55.33 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 51.76 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 51.76 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 51.76 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 48.42 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [---------------------------------------------->] 100.00% 48.42 MiB p/s ETA 0s90.40 MiB / 90.40 MiB [-------------------------------------------------] 100.00% 23.27 MiB p/s 4.1s2026-04-17T21:35:42Z	INFO	[vulndb] Artifact successfully downloaded	repo="mirror.gcr.io/aquasec/trivy-db:2"
+2026-04-17T21:35:42Z	INFO	[vuln] Vulnerability scanning is enabled
+2026-04-17T21:35:42Z	INFO	[secret] Secret scanning is enabled
+2026-04-17T21:35:42Z	INFO	[secret] If your scanning is slow, please try '--scanners vuln' to disable secret scanning
+2026-04-17T21:35:42Z	INFO	[secret] Please see https://trivy.dev/docs/v0.70/guide/scanner/secret#recommendation for faster secret detection
+2026-04-17T21:35:44Z	INFO	Detected OS	family="alpine" version="3.23.4"
+2026-04-17T21:35:44Z	INFO	[alpine] Detecting vulnerabilities...	os_version="3.23" repository="3.23" pkg_num=72
+2026-04-17T21:35:44Z	INFO	Number of language-specific files	num=0
+
+Report Summary
+
+┌────────────────────────────────────────────────────────────────────────────┬────────┬─────────────────┬─────────┐
+│                                   Target                                   │  Type  │ Vulnerabilities │ Secrets │
+├────────────────────────────────────────────────────────────────────────────┼────────┼─────────────────┼─────────┤
+│ 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/frontend:v1 (alpine │ alpine │        0        │    -    │
+│ 3.23.4)                                                                    │        │                 │         │
+└────────────────────────────────────────────────────────────────────────────┴────────┴─────────────────┴─────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+

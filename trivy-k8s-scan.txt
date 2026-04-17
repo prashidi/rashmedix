@@ -1,0 +1,337 @@
+2026-04-17T21:36:20Z	INFO	[misconfig] Misconfiguration scanning is enabled
+2026-04-17T21:36:20Z	INFO	[checks-client] Need to update the checks bundle
+2026-04-17T21:36:20Z	INFO	[checks-client] Downloading the checks bundle...
+234.65 KiB / 234.65 KiB [------------------------------------------------------] 100.00% ? p/s 100ms2026-04-17T21:36:22Z	INFO	Detected config files	num=10
+
+Report Summary
+
+┌───────────────────────────────────────────────────┬────────────┬───────────────────┐
+│                      Target                       │    Type    │ Misconfigurations │
+├───────────────────────────────────────────────────┼────────────┼───────────────────┤
+│ helm/rashmedix/templates/backend-deployment.yaml  │    helm    │         3         │
+├───────────────────────────────────────────────────┼────────────┼───────────────────┤
+│ helm/rashmedix/templates/frontend-deployment.yaml │    helm    │         3         │
+├───────────────────────────────────────────────────┼────────────┼───────────────────┤
+│ helm/rashmedix/templates/hpa.yaml                 │    helm    │         0         │
+├───────────────────────────────────────────────────┼────────────┼───────────────────┤
+│ helm/rashmedix/templates/ingress.yaml             │    helm    │         0         │
+├───────────────────────────────────────────────────┼────────────┼───────────────────┤
+│ manifests/blue-deployment.yaml                    │ kubernetes │         3         │
+├───────────────────────────────────────────────────┼────────────┼───────────────────┤
+│ manifests/green-deployment.yaml                   │ kubernetes │         3         │
+├───────────────────────────────────────────────────┼────────────┼───────────────────┤
+│ manifests/namespace.yaml                          │ kubernetes │         0         │
+├───────────────────────────────────────────────────┼────────────┼───────────────────┤
+│ manifests/secrets.yaml                            │ kubernetes │         0         │
+├───────────────────────────────────────────────────┼────────────┼───────────────────┤
+│ manifests/security-context.yaml                   │ kubernetes │         1         │
+├───────────────────────────────────────────────────┼────────────┼───────────────────┤
+│ manifests/servicemonitor.yaml                     │ kubernetes │         0         │
+└───────────────────────────────────────────────────┴────────────┴───────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+
+helm/rashmedix/templates/backend-deployment.yaml (helm)
+=======================================================
+Tests: 24 (SUCCESSES: 21, FAILURES: 3)
+Failures: 3 (HIGH: 3, CRITICAL: 0)
+
+KSV-0014 (HIGH): Container 'backend' of Deployment 'backend' should set 'securityContext.readOnlyRootFilesystem' to true
+════════════════════════════════════════
+An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+
+See https://avd.aquasec.com/misconfig/ksv-0014
+────────────────────────────────────────
+ helm/rashmedix/templates/backend-deployment.yaml:22-68
+────────────────────────────────────────
+  22 ┌         - name: backend
+  23 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  24 │           imagePullPolicy: Always
+  25 │           ports:
+  26 │             - containerPort: 8000
+  27 │           envFrom:
+  28 │             - secretRef:
+  29 │                 name: rashmedix-secrets
+  30 └           env:
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): container backend in rashmedix namespace is using the default security context
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ helm/rashmedix/templates/backend-deployment.yaml:22-68
+────────────────────────────────────────
+  22 ┌         - name: backend
+  23 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  24 │           imagePullPolicy: Always
+  25 │           ports:
+  26 │             - containerPort: 8000
+  27 │           envFrom:
+  28 │             - secretRef:
+  29 │                 name: rashmedix-secrets
+  30 └           env:
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): deployment backend in rashmedix namespace is using the default security context, which allows root privileges
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ helm/rashmedix/templates/backend-deployment.yaml:20-68
+────────────────────────────────────────
+  20 ┌     spec:
+  21 │       containers:
+  22 │         - name: backend
+  23 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  24 │           imagePullPolicy: Always
+  25 │           ports:
+  26 │             - containerPort: 8000
+  27 │           envFrom:
+  28 └             - secretRef:
+  ..   
+────────────────────────────────────────
+
+
+
+helm/rashmedix/templates/frontend-deployment.yaml (helm)
+========================================================
+Tests: 24 (SUCCESSES: 21, FAILURES: 3)
+Failures: 3 (HIGH: 3, CRITICAL: 0)
+
+KSV-0014 (HIGH): Container 'frontend' of Deployment 'frontend' should set 'securityContext.readOnlyRootFilesystem' to true
+════════════════════════════════════════
+An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+
+See https://avd.aquasec.com/misconfig/ksv-0014
+────────────────────────────────────────
+ helm/rashmedix/templates/frontend-deployment.yaml:22-45
+────────────────────────────────────────
+  22 ┌         - name: frontend
+  23 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/frontend:v1
+  24 │           imagePullPolicy: Always
+  25 │           ports:
+  26 │             - containerPort: 80
+  27 │           resources:
+  28 │             requests:
+  29 │               cpu: 100m
+  30 └               memory: 128Mi
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): container frontend in rashmedix namespace is using the default security context
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ helm/rashmedix/templates/frontend-deployment.yaml:22-45
+────────────────────────────────────────
+  22 ┌         - name: frontend
+  23 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/frontend:v1
+  24 │           imagePullPolicy: Always
+  25 │           ports:
+  26 │             - containerPort: 80
+  27 │           resources:
+  28 │             requests:
+  29 │               cpu: 100m
+  30 └               memory: 128Mi
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): deployment frontend in rashmedix namespace is using the default security context, which allows root privileges
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ helm/rashmedix/templates/frontend-deployment.yaml:20-45
+────────────────────────────────────────
+  20 ┌     spec:
+  21 │       containers:
+  22 │         - name: frontend
+  23 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/frontend:v1
+  24 │           imagePullPolicy: Always
+  25 │           ports:
+  26 │             - containerPort: 80
+  27 │           resources:
+  28 └             requests:
+  ..   
+────────────────────────────────────────
+
+
+
+manifests/blue-deployment.yaml (kubernetes)
+===========================================
+Tests: 26 (SUCCESSES: 23, FAILURES: 3)
+Failures: 3 (HIGH: 3, CRITICAL: 0)
+
+KSV-0014 (HIGH): Container 'backend' of Deployment 'backend-blue' should set 'securityContext.readOnlyRootFilesystem' to true
+════════════════════════════════════════
+An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+
+See https://avd.aquasec.com/misconfig/ksv-0014
+────────────────────────────────────────
+ manifests/blue-deployment.yaml:23-73
+────────────────────────────────────────
+  23 ┌         - name: backend
+  24 │           # Blue runs current stable image v1
+  25 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  26 │           imagePullPolicy: Always
+  27 │           ports:
+  28 │             - containerPort: 8000
+  29 │           envFrom:
+  30 │             - secretRef:
+  31 └                 name: rashmedix-secrets
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): container backend-blue in rashmedix namespace is using the default security context
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ manifests/blue-deployment.yaml:23-73
+────────────────────────────────────────
+  23 ┌         - name: backend
+  24 │           # Blue runs current stable image v1
+  25 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  26 │           imagePullPolicy: Always
+  27 │           ports:
+  28 │             - containerPort: 8000
+  29 │           envFrom:
+  30 │             - secretRef:
+  31 └                 name: rashmedix-secrets
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): deployment backend-blue in rashmedix namespace is using the default security context, which allows root privileges
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ manifests/blue-deployment.yaml:21-73
+────────────────────────────────────────
+  21 ┌     spec:
+  22 │       containers:
+  23 │         - name: backend
+  24 │           # Blue runs current stable image v1
+  25 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  26 │           imagePullPolicy: Always
+  27 │           ports:
+  28 │             - containerPort: 8000
+  29 └           envFrom:
+  ..   
+────────────────────────────────────────
+
+
+
+manifests/green-deployment.yaml (kubernetes)
+============================================
+Tests: 24 (SUCCESSES: 21, FAILURES: 3)
+Failures: 3 (HIGH: 3, CRITICAL: 0)
+
+KSV-0014 (HIGH): Container 'backend' of Deployment 'backend-green' should set 'securityContext.readOnlyRootFilesystem' to true
+════════════════════════════════════════
+An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+
+See https://avd.aquasec.com/misconfig/ksv-0014
+────────────────────────────────────────
+ manifests/green-deployment.yaml:23-74
+────────────────────────────────────────
+  23 ┌         - name: backend
+  24 │           # Green runs new image — same v1 for demo
+  25 │           # In real scenario this would be v2
+  26 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  27 │           imagePullPolicy: Always
+  28 │           ports:
+  29 │             - containerPort: 8000
+  30 │           envFrom:
+  31 └             - secretRef:
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): container backend-green in rashmedix namespace is using the default security context
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ manifests/green-deployment.yaml:23-74
+────────────────────────────────────────
+  23 ┌         - name: backend
+  24 │           # Green runs new image — same v1 for demo
+  25 │           # In real scenario this would be v2
+  26 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  27 │           imagePullPolicy: Always
+  28 │           ports:
+  29 │             - containerPort: 8000
+  30 │           envFrom:
+  31 └             - secretRef:
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): deployment backend-green in rashmedix namespace is using the default security context, which allows root privileges
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ manifests/green-deployment.yaml:21-74
+────────────────────────────────────────
+  21 ┌     spec:
+  22 │       containers:
+  23 │         - name: backend
+  24 │           # Green runs new image — same v1 for demo
+  25 │           # In real scenario this would be v2
+  26 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  27 │           imagePullPolicy: Always
+  28 │           ports:
+  29 └             - containerPort: 8000
+  ..   
+────────────────────────────────────────
+
+
+
+manifests/security-context.yaml (kubernetes)
+============================================
+Tests: 23 (SUCCESSES: 22, FAILURES: 1)
+Failures: 1 (HIGH: 1, CRITICAL: 0)
+
+KSV-0014 (HIGH): Container 'backend' of Deployment 'backend' should set 'securityContext.readOnlyRootFilesystem' to true
+════════════════════════════════════════
+An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+
+See https://avd.aquasec.com/misconfig/ksv-0014
+────────────────────────────────────────
+ manifests/security-context.yaml:17-26
+────────────────────────────────────────
+  17 ┌         - name: backend
+  18 │           securityContext:
+  19 │             # Prevent privilege escalation
+  20 │             allowPrivilegeEscalation: false
+  21 │             # Read-only root filesystem
+  22 │             readOnlyRootFilesystem: false
+  23 │             # Drop all Linux capabilities
+  24 │             capabilities:
+  25 │               drop:
+  26 └                 - ALL
+────────────────────────────────────────
+
+

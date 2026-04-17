@@ -1,0 +1,26 @@
+  Using default CI config
+[1mImage Source: [0mdocker://437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/frontend:v1
+[1mExtracting image from docker-engine...[0m (this can take a while for large images)
+[1mAnalyzing image...[0m
+  efficiency: 99.3772 %
+  wastedBytes: 627145 bytes (627 kB)
+  userWastedPercent: 1.1720 %
+[1mInefficient Files:[0m
+Count  Wasted Space  File Path
+    2        436 kB  /etc/ssl/certs/ca-certificates.crt
+    3        165 kB  /lib/apk/db/installed
+    2         11 kB  /var/log/apk.log
+    3        7.7 kB  /lib/apk/db/scripts.tar.gz
+    2        1.5 kB  /etc/nginx/conf.d/default.conf
+    2        1.5 kB  /etc/passwd
+    2        1.4 kB  /usr/share/nginx/html/index.html
+    2        1.0 kB  /etc/group
+    3         703 B  /etc/apk/world
+    2         547 B  /etc/shadow
+    3         471 B  /lib/apk/db/triggers
+[1mResults:[0m
+  PASS: highestUserWastedPercent
+  [34mSKIP[0m: highestWastedBytes: rule disabled
+  PASS: lowestEfficiency
+[32mResult:PASS [Total:3] [Passed:2] [Failed:0] [Warn:0] [Skipped:1][0m
+

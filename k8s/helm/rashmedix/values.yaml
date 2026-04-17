@@ -1,0 +1,61 @@
+global:
+  namespace: rashmedix
+  environment: production
+
+backend:
+  name: backend
+  replicaCount: 2
+  image:
+    repository: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend
+    tag: "v1"
+    pullPolicy: Always
+  port: 8000
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  readinessProbe:
+    path: /api/
+    initialDelaySeconds: 60
+    periodSeconds: 15
+    failureThreshold: 10
+  livenessProbe:
+    path: /api/
+    initialDelaySeconds: 90
+    periodSeconds: 30
+    failureThreshold: 10
+
+frontend:
+  name: frontend
+  replicaCount: 2
+  image:
+    repository: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/frontend
+    tag: "v1"
+    pullPolicy: Always
+  port: 80
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
+
+ingress:
+  enabled: true
+  className: alb
+  host: prashidi.people.aws.dev
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 70

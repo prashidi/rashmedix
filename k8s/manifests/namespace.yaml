@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rashmedix
+  labels:
+    project: rashmedix
+    environment: production

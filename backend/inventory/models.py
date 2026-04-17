@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Supplier(models.Model):
     name = models.CharField(max_length=200)
     contact_email = models.EmailField(unique=True)
@@ -38,8 +39,18 @@ class Medicine(models.Model):
 
     name = models.CharField(max_length=200)
     generic_name = models.CharField(max_length=200, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='medicines')
-    supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, null=True, related_name='medicines')
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='medicines'
+    )
+    supplier = models.ForeignKey(
+        Supplier,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='medicines'
+    )
     unit = models.CharField(max_length=20, choices=UNIT_CHOICES, default='tablet')
     quantity_in_stock = models.PositiveIntegerField(default=0)
     reorder_level = models.PositiveIntegerField(default=10)
@@ -77,7 +88,11 @@ class StockTransaction(models.Model):
         ('expired', 'Expired'),
     ]
 
-    medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE, related_name='transactions')
+    medicine = models.ForeignKey(
+        Medicine,
+        on_delete=models.CASCADE,
+        related_name='transactions'
+    )
     transaction_type = models.CharField(max_length=20, choices=TRANSACTION_TYPES)
     quantity = models.IntegerField()
     notes = models.TextField(blank=True)

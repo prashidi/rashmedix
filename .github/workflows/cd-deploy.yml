@@ -49,34 +49,65 @@ jobs:
         with:
           version: 'v3.17.3'
 
-      - name: Take ownership of existing resources
+      - name: Check Helm release status
+        id: helm-status
         run: |
-          kubectl annotate ingress rashmedix-ingress \
-            -n rashmedix \
-            meta.helm.sh/release-name=rashmedix \
-            meta.helm.sh/release-namespace=rashmedix \
-            --overwrite 2>/dev/null || true
-          kubectl label ingress rashmedix-ingress \
-            -n rashmedix \
-            app.kubernetes.io/managed-by=Helm \
-            --overwrite 2>/dev/null || true
+          STATUS=$(helm status rashmedix -n rashmedix \
+            --output json 2>/dev/null | \
+            python3 -c "import sys,json; print(json.load(sys.stdin)['info']['status'])" \
+            2>/dev/null || echo "not-found")
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          echo "Helm release status: $STATUS"
 
-      - name: Deploy with Helm
+      - name: Clean up failed release if needed
+        if: |
+          steps.helm-status.outputs.status == 'failed' ||
+          steps.helm-status.outputs.status == 'pending-upgrade' ||
+          steps.helm-status.outputs.status == 'pending-install'
+        run: |
+          echo "Cleaning up failed release..."
+          helm uninstall rashmedix -n rashmedix 2>/dev/null || true
+          sleep 10
+
+      - name: Deploy with Helm upgrade or install
         run: |
           helm upgrade rashmedix ./k8s/helm/rashmedix \
+            --install \
             --namespace rashmedix \
             --create-namespace \
-            --timeout 5m \
-            --force \
+            --timeout 8m \
+            --wait \
             --set backend.image.tag=v1 \
             --set frontend.image.tag=v1 \
             --set backend.image.repository=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/rashmedix/backend \
             --set frontend.image.repository=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/rashmedix/frontend
 
-      - name: Verify deployment
+      - name: Recreate rashmedix secret after install
         run: |
+          kubectl create secret generic rashmedix-secrets \
+            --namespace rashmedix \
+            --from-literal=DB_NAME=rashmedix \
+            --from-literal=DB_USER=rashmedix_user \
+            --from-literal=DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+            --from-literal=DB_HOST=$(aws rds describe-db-instances \
+              --db-instance-identifier rashmedix-postgres \
+              --region ${{ env.AWS_REGION }} \
+              --query 'DBInstances[0].Endpoint.Address' \
+              --output text) \
+            --from-literal=DB_PORT=5432 \
+            --from-literal=SECRET_KEY=prod-secret-key-rashmedix-2024 \
+            --from-literal=ALLOWED_HOSTS=prashidi.people.aws.dev,localhost \
+            --from-literal=CORS_ALLOWED_ORIGINS=https://prashidi.people.aws.dev \
+            --dry-run=client -o yaml | kubectl apply -f -
+
+      - name: Restart backend to pick up secret
+        run: |
+          kubectl rollout restart deployment/backend -n rashmedix
           kubectl rollout status deployment/backend \
             -n rashmedix --timeout=3m
+
+      - name: Verify deployment
+        run: |
           kubectl rollout status deployment/frontend \
             -n rashmedix --timeout=3m
 

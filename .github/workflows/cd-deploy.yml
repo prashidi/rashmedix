@@ -49,13 +49,25 @@ jobs:
         with:
           version: 'v3.17.3'
 
+      - name: Take ownership of existing resources
+        run: |
+          kubectl annotate ingress rashmedix-ingress \
+            -n rashmedix \
+            meta.helm.sh/release-name=rashmedix \
+            meta.helm.sh/release-namespace=rashmedix \
+            --overwrite 2>/dev/null || true
+          kubectl label ingress rashmedix-ingress \
+            -n rashmedix \
+            app.kubernetes.io/managed-by=Helm \
+            --overwrite 2>/dev/null || true
+
       - name: Deploy with Helm
         run: |
           helm upgrade rashmedix ./k8s/helm/rashmedix \
             --namespace rashmedix \
             --create-namespace \
             --timeout 5m \
-            --atomic \
+            --force \
             --set backend.image.tag=v1 \
             --set frontend.image.tag=v1 \
             --set backend.image.repository=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/rashmedix/backend \

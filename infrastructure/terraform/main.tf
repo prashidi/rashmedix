@@ -270,3 +270,14 @@ resource "aws_secretsmanager_secret_version" "db_password" {
 locals {
   cluster_name = aws_eks_cluster.main.name
 }
+
+# Additional RDS ingress rule — allow from entire VPC for EKS node flexibility
+resource "aws_security_group_rule" "rds_from_vpc" {
+  type              = "ingress"
+  from_port         = 5432
+  to_port           = 5432
+  protocol          = "tcp"
+  cidr_blocks       = [var.vpc_cidr]
+  security_group_id = aws_security_group.rds.id
+  description       = "Allow PostgreSQL from entire VPC CIDR"
+}

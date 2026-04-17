@@ -1,15 +1,19 @@
 from rest_framework import serializers
+
 from .models import Supplier, Category, Medicine, StockTransaction
+
 
 class SupplierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Supplier
         fields = '__all__'
 
+
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+
 
 class MedicineSerializer(serializers.ModelSerializer):
     stock_status = serializers.ReadOnlyField()
@@ -20,6 +24,7 @@ class MedicineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Medicine
         fields = '__all__'
+
 
 class StockTransactionSerializer(serializers.ModelSerializer):
     medicine_name = serializers.CharField(source='medicine.name', read_only=True)

@@ -1,12 +1,15 @@
 from rest_framework import viewsets, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django.db.models import Q
+
 from .models import Supplier, Category, Medicine, StockTransaction
 from .serializers import (
-    SupplierSerializer, CategorySerializer,
-    MedicineSerializer, StockTransactionSerializer
+    SupplierSerializer,
+    CategorySerializer,
+    MedicineSerializer,
+    StockTransactionSerializer,
 )
+
 
 class SupplierViewSet(viewsets.ModelViewSet):
     queryset = Supplier.objects.all()
@@ -14,9 +17,11 @@ class SupplierViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ['name', 'contact_email']
 
+
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
 
 class MedicineViewSet(viewsets.ModelViewSet):
     queryset = Medicine.objects.select_related('category', 'supplier').all()
@@ -27,9 +32,8 @@ class MedicineViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'])
     def low_stock(self, request):
-        low = self.queryset.filter(
-            quantity_in_stock__lte=models_low_stock_filter()
-        )
+        from django.db.models import F
+        low = self.queryset.filter(quantity_in_stock__lte=F('reorder_level'))
         serializer = self.get_serializer(low, many=True)
         return Response(serializer.data)
 
@@ -64,9 +68,6 @@ class MedicineViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(medicine)
         return Response(serializer.data)
 
-def models_low_stock_filter():
-    from django.db.models import F
-    return F('reorder_level')
 
 class StockTransactionViewSet(viewsets.ModelViewSet):
     queryset = StockTransaction.objects.select_related('medicine').all()

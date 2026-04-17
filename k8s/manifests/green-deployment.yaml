@@ -1,0 +1,74 @@
+# ── Green deployment — version 2 (staged, not live yet) ───────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-green
+  namespace: rashmedix
+  labels:
+    app: backend
+    version: green
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+      version: green
+  template:
+    metadata:
+      labels:
+        app: backend
+        version: green
+    spec:
+      containers:
+        - name: backend
+          # Green runs new image — same v1 for demo
+          # In real scenario this would be v2
+          image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: rashmedix-secrets
+          env:
+            - name: DEBUG
+              value: "False"
+            # Identify green version in logs
+            - name: APP_VERSION
+              value: "green-v2"
+          command:
+            - sh
+            - -c
+            - |
+              python manage.py migrate --noinput && \
+              gunicorn rashmedix_backend.wsgi:application \
+              --bind 0.0.0.0:8000 \
+              --workers 3 \
+              --timeout 120
+          readinessProbe:
+            exec:
+              command:
+                - python
+                - -c
+                - "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/')"
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+                - python
+                - -c
+                - "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/')"
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            failureThreshold: 5
+            timeoutSeconds: 10
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi

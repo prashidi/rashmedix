@@ -1,0 +1,21 @@
+# ── ServiceMonitor — tells Prometheus to scrape backend-service ───────────────
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: rashmedix-backend-monitor
+  namespace: monitoring
+  labels:
+    # Must match Prometheus serviceMonitorSelector
+    release: prometheus-stack
+spec:
+  # Select services in rashmedix namespace
+  namespaceSelector:
+    matchNames:
+      - rashmedix
+  selector:
+    matchLabels:
+      app: backend
+  endpoints:
+    - port: "8000"
+      path: /api/
+      interval: 30s

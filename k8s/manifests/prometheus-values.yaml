@@ -1,0 +1,79 @@
+# ── Prometheus + Grafana — no persistent storage for EKS demo ─────────────────
+
+grafana:
+  enabled: true
+  adminUser: admin
+  adminPassword: RashMedix2024!
+  service:
+    type: ClusterIP
+  defaultDashboardsEnabled: true
+  defaultDashboardsTimezone: Europe/Dublin
+  # No persistence needed for demo
+  persistence:
+    enabled: false
+
+prometheus:
+  enabled: true
+  prometheusSpec:
+    scrapeInterval: 30s
+    evaluationInterval: 30s
+    retention: 2h
+    # Disable persistent storage — use memory only
+    storageSpec: {}
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    # Resource limits to fit on t3.medium nodes
+    resources:
+      requests:
+        cpu: 200m
+        memory: 400Mi
+      limits:
+        cpu: 500m
+        memory: 800Mi
+
+alertmanager:
+  enabled: true
+  alertmanagerSpec:
+    # Disable persistent storage
+    storage: {}
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        cpu: 100m
+        memory: 128Mi
+
+additionalPrometheusRulesMap:
+  rashmedix-rules:
+    groups:
+      - name: rashmedix.rules
+        rules:
+          - alert: RashMedixBackendDown
+            expr: |
+              kube_deployment_status_replicas_available{
+                deployment="backend",
+                namespace="rashmedix"
+              } < 1
+            for: 1m
+            labels:
+              severity: critical
+            annotations:
+              summary: "RashMedix backend has no available replicas"
+          - alert: RashMedixFrontendDown
+            expr: |
+              kube_deployment_status_replicas_available{
+                deployment="frontend",
+                namespace="rashmedix"
+              } < 1
+            for: 1m
+            labels:
+              severity: critical
+            annotations:
+              summary: "RashMedix frontend has no available replicas"
+
+nodeExporter:
+  enabled: true
+
+kubeStateMetrics:
+  enabled: true

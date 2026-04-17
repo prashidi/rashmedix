@@ -8,12 +8,15 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    {{- /* Named ALB — prevents new ALB being created on redeploy */}}
+    alb.ingress.kubernetes.io/load-balancer-name: rashmedix-alb
 spec:
   ingressClassName: alb
   rules:
-    - host: {{ .Values.ingress.host }}
-      http:
+    {{- /* No host field — accepts ALB hostname, subdomain, and any future domain */}}
+    - http:
         paths:
+          {{- /* /api goes to Django backend service */}}
           - path: /api
             pathType: Prefix
             backend:
@@ -21,6 +24,7 @@ spec:
                 name: {{ .Values.backend.name }}-service
                 port:
                   number: 8000
+          {{- /* / catch-all goes to React frontend — must be last */}}
           - path: /
             pathType: Prefix
             backend:

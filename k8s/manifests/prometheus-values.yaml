@@ -71,6 +71,17 @@ additionalPrometheusRulesMap:
               severity: critical
             annotations:
               summary: "RashMedix frontend has no available replicas"
+          - alert: RashMedixHighCPU
+            expr: |
+              rate(container_cpu_usage_seconds_total{
+                namespace="rashmedix",
+                container!=""
+              }[5m]) > 0.8
+            for: 5m
+            labels:
+              severity: warning
+            annotations:
+              summary: "RashMedix container CPU above 80%"
 
 nodeExporter:
   enabled: true

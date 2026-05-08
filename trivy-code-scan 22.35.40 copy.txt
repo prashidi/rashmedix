@@ -1,0 +1,715 @@
+2026-04-17T21:35:59Z	INFO	[misconfig] Misconfiguration scanning is enabled
+2026-04-17T21:35:59Z	INFO	[checks-client] Need to update the checks bundle
+2026-04-17T21:35:59Z	INFO	[checks-client] Downloading the checks bundle...
+234.65 KiB / 234.65 KiB [------------------------------------------------------] 100.00% ? p/s 100ms2026-04-17T21:36:01Z	INFO	[secret] Secret scanning is enabled
+2026-04-17T21:36:01Z	INFO	[secret] If your scanning is slow, please try '--scanners misconfig' to disable secret scanning
+2026-04-17T21:36:01Z	INFO	[secret] Please see https://trivy.dev/docs/v0.70/guide/scanner/secret#recommendation for faster secret detection
+2026-04-17T21:36:15Z	INFO	[terraform scanner] Scanning root module	file_path="infrastructure/terraform"
+2026-04-17T21:36:15Z	WARN	[terraform parser] Variable values were not found in the environment or variable files. Evaluating may not work correctly.	module="root" variables="db_password, ecr_backend_image, ecr_frontend_image"
+2026-04-17T21:36:16Z	WARN	[pip] Unable to find python `site-packages` directory. License detection is skipped.	err="unable to find path to Python executable"
+2026-04-17T21:36:16Z	INFO	[terraform scanner] Scanning root module	file_path="."
+2026-04-17T21:36:16Z	INFO	[terraform scanner] Scanning root module	file_path="."
+2026-04-17T21:36:16Z	INFO	Suppressing dependencies for development and testing. To display them, try the '--include-dev-deps' flag.
+2026-04-17T21:36:16Z	INFO	Number of language-specific files	num=2
+2026-04-17T21:36:16Z	INFO	Detected config files	num=16
+
+Report Summary
+
+┌───────────────────────────────────────────────────────┬────────────────────────┬─────────┬───────────────────┐
+│                        Target                         │          Type          │ Secrets │ Misconfigurations │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ backend/requirements.txt                              │          pip           │    -    │         -         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ frontend/package-lock.json                            │          npm           │    -    │         -         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ .                                                     │ terraformplan-snapshot │    -    │         0         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ backend/Dockerfile                                    │       dockerfile       │    -    │         1         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ frontend/Dockerfile                                   │       dockerfile       │    -    │         1         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ infrastructure/terraform                              │       terraform        │    -    │         0         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ infrastructure/terraform/main.tf                      │       terraform        │    -    │         8         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ k8s/helm/rashmedix/templates/backend-deployment.yaml  │          helm          │    -    │         3         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ k8s/helm/rashmedix/templates/frontend-deployment.yaml │          helm          │    -    │         3         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ k8s/helm/rashmedix/templates/hpa.yaml                 │          helm          │    -    │         0         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ k8s/helm/rashmedix/templates/ingress.yaml             │          helm          │    -    │         0         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ k8s/manifests/blue-deployment.yaml                    │       kubernetes       │    -    │         3         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ k8s/manifests/green-deployment.yaml                   │       kubernetes       │    -    │         3         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ k8s/manifests/namespace.yaml                          │       kubernetes       │    -    │         0         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ k8s/manifests/secrets.yaml                            │       kubernetes       │    -    │         0         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ k8s/manifests/security-context.yaml                   │       kubernetes       │    -    │         1         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ k8s/manifests/servicemonitor.yaml                     │       kubernetes       │    -    │         0         │
+├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
+│ main.tf                                               │ terraformplan-snapshot │    -    │         8         │
+└───────────────────────────────────────────────────────┴────────────────────────┴─────────┴───────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+
+backend/Dockerfile (dockerfile)
+===============================
+Tests: 20 (SUCCESSES: 19, FAILURES: 1)
+Failures: 1 (HIGH: 1, CRITICAL: 0)
+
+DS-0002 (HIGH): Specify at least 1 USER command in Dockerfile with non-root user as argument
+════════════════════════════════════════
+Running containers with 'root' user can lead to a container escape situation. It is a best practice to run containers as non-root users, which can be done by adding a 'USER' statement to the Dockerfile.
+
+See https://avd.aquasec.com/misconfig/ds-0002
+────────────────────────────────────────
+
+
+
+frontend/Dockerfile (dockerfile)
+================================
+Tests: 20 (SUCCESSES: 19, FAILURES: 1)
+Failures: 1 (HIGH: 1, CRITICAL: 0)
+
+DS-0002 (HIGH): Specify at least 1 USER command in Dockerfile with non-root user as argument
+════════════════════════════════════════
+Running containers with 'root' user can lead to a container escape situation. It is a best practice to run containers as non-root users, which can be done by adding a 'USER' statement to the Dockerfile.
+
+See https://avd.aquasec.com/misconfig/ds-0002
+────────────────────────────────────────
+
+
+
+infrastructure/terraform/main.tf (terraform)
+============================================
+Tests: 8 (SUCCESSES: 0, FAILURES: 8)
+Failures: 8 (HIGH: 4, CRITICAL: 4)
+
+AWS-0039 (HIGH): Cluster does not have secret encryption enabled.
+════════════════════════════════════════
+EKS cluster resources should have the encryption_config block set with protection of the secrets resource.
+
+
+See https://avd.aquasec.com/misconfig/aws-0039
+────────────────────────────────────────
+ infrastructure/terraform/main.tf:128-143
+────────────────────────────────────────
+ 128 ┌ resource "aws_eks_cluster" "main" {
+ 129 │   name     = "${var.project}-cluster"
+ 130 │   role_arn = aws_iam_role.eks_cluster.arn
+ 131 │   version  = var.eks_cluster_version
+ 132 │ 
+ 133 │   vpc_config {
+ 134 │     subnet_ids              = concat(aws_subnet.private[*].id, aws_subnet.public[*].id)
+ 135 │     endpoint_private_access = true
+ 136 └     endpoint_public_access  = true
+ ...   
+────────────────────────────────────────
+
+
+AWS-0040 (CRITICAL): Public cluster access is enabled.
+════════════════════════════════════════
+EKS clusters are available publicly by default, this should be explicitly disabled in the vpc_config of the EKS cluster resource.
+
+
+See https://avd.aquasec.com/misconfig/aws-0040
+────────────────────────────────────────
+ infrastructure/terraform/main.tf:136
+   via infrastructure/terraform/main.tf:133-138 (vpc_config)
+    via infrastructure/terraform/main.tf:128-143 (aws_eks_cluster.main)
+────────────────────────────────────────
+ 128   resource "aws_eks_cluster" "main" {
+ ...   
+ 136 [     endpoint_public_access  = true
+ ...   
+ 143   }
+────────────────────────────────────────
+
+
+AWS-0041 (CRITICAL): Cluster allows access from a public CIDR: 0.0.0.0/0
+════════════════════════════════════════
+EKS Clusters have public access cidrs set to 0.0.0.0/0 by default which is wide open to the internet. This should be explicitly set to a more specific private CIDR range
+
+
+See https://avd.aquasec.com/misconfig/aws-0041
+────────────────────────────────────────
+ infrastructure/terraform/main.tf:133-138
+   via infrastructure/terraform/main.tf:128-143 (aws_eks_cluster.main)
+────────────────────────────────────────
+ 128   resource "aws_eks_cluster" "main" {
+ 129     name     = "${var.project}-cluster"
+ 130     role_arn = aws_iam_role.eks_cluster.arn
+ 131     version  = var.eks_cluster_version
+ 132   
+ 133 ┌   vpc_config {
+ 134 │     subnet_ids              = concat(aws_subnet.private[*].id, aws_subnet.public[*].id)
+ 135 │     endpoint_private_access = true
+ 136 └     endpoint_public_access  = true
+ ...   
+────────────────────────────────────────
+
+
+AWS-0104 (CRITICAL): Security group rule allows unrestricted egress to any IP address.
+════════════════════════════════════════
+Opening up ports to connect out to the public internet is generally to be avoided. You should restrict access to IP addresses or ranges that are explicitly required where possible.
+
+
+See https://avd.aquasec.com/misconfig/aws-0104
+────────────────────────────────────────
+ infrastructure/terraform/main.tf:122
+   via infrastructure/terraform/main.tf:118-123 (egress)
+    via infrastructure/terraform/main.tf:113-126 (aws_security_group.eks_cluster)
+────────────────────────────────────────
+ 113   resource "aws_security_group" "eks_cluster" {
+ ...   
+ 122 [     cidr_blocks = ["0.0.0.0/0"]
+ ...   
+ 126   }
+────────────────────────────────────────
+
+
+AWS-0104 (CRITICAL): Security group rule allows unrestricted egress to any IP address.
+════════════════════════════════════════
+Opening up ports to connect out to the public internet is generally to be avoided. You should restrict access to IP addresses or ranges that are explicitly required where possible.
+
+
+See https://avd.aquasec.com/misconfig/aws-0104
+────────────────────────────────────────
+ infrastructure/terraform/main.tf:213
+   via infrastructure/terraform/main.tf:209-214 (egress)
+    via infrastructure/terraform/main.tf:196-217 (aws_security_group.rds)
+────────────────────────────────────────
+ 196   resource "aws_security_group" "rds" {
+ ...   
+ 213 [     cidr_blocks = ["0.0.0.0/0"]
+ ...   
+ 217   }
+────────────────────────────────────────
+
+
+AWS-0164 (HIGH): Subnet associates public IP address.
+════════════════════════════════════════
+You should limit the provision of public IP addresses for resources. Resources should not be exposed on the public internet, but should have access limited to consumers required for the function of your application.
+
+
+See https://avd.aquasec.com/misconfig/aws-0164
+────────────────────────────────────────
+ infrastructure/terraform/main.tf:28
+   via infrastructure/terraform/main.tf:23-35 (aws_subnet.public[0])
+────────────────────────────────────────
+  23   resource "aws_subnet" "public" {
+  ..   
+  28 [   map_public_ip_on_launch = true
+  ..   
+  35   }
+────────────────────────────────────────
+
+
+AWS-0164 (HIGH): Subnet associates public IP address.
+════════════════════════════════════════
+You should limit the provision of public IP addresses for resources. Resources should not be exposed on the public internet, but should have access limited to consumers required for the function of your application.
+
+
+See https://avd.aquasec.com/misconfig/aws-0164
+────────────────────────────────────────
+ infrastructure/terraform/main.tf:28
+   via infrastructure/terraform/main.tf:23-35 (aws_subnet.public[1])
+────────────────────────────────────────
+  23   resource "aws_subnet" "public" {
+  ..   
+  28 [   map_public_ip_on_launch = true
+  ..   
+  35   }
+────────────────────────────────────────
+
+
+AWS-0164 (HIGH): Subnet associates public IP address.
+════════════════════════════════════════
+You should limit the provision of public IP addresses for resources. Resources should not be exposed on the public internet, but should have access limited to consumers required for the function of your application.
+
+
+See https://avd.aquasec.com/misconfig/aws-0164
+────────────────────────────────────────
+ infrastructure/terraform/main.tf:28
+   via infrastructure/terraform/main.tf:23-35 (aws_subnet.public[2])
+────────────────────────────────────────
+  23   resource "aws_subnet" "public" {
+  ..   
+  28 [   map_public_ip_on_launch = true
+  ..   
+  35   }
+────────────────────────────────────────
+
+
+
+k8s/helm/rashmedix/templates/backend-deployment.yaml (helm)
+===========================================================
+Tests: 24 (SUCCESSES: 21, FAILURES: 3)
+Failures: 3 (HIGH: 3, CRITICAL: 0)
+
+KSV-0014 (HIGH): Container 'backend' of Deployment 'backend' should set 'securityContext.readOnlyRootFilesystem' to true
+════════════════════════════════════════
+An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+
+See https://avd.aquasec.com/misconfig/ksv-0014
+────────────────────────────────────────
+ k8s/helm/rashmedix/templates/backend-deployment.yaml:22-68
+────────────────────────────────────────
+  22 ┌         - name: backend
+  23 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  24 │           imagePullPolicy: Always
+  25 │           ports:
+  26 │             - containerPort: 8000
+  27 │           envFrom:
+  28 │             - secretRef:
+  29 │                 name: rashmedix-secrets
+  30 └           env:
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): container backend in rashmedix namespace is using the default security context
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ k8s/helm/rashmedix/templates/backend-deployment.yaml:22-68
+────────────────────────────────────────
+  22 ┌         - name: backend
+  23 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  24 │           imagePullPolicy: Always
+  25 │           ports:
+  26 │             - containerPort: 8000
+  27 │           envFrom:
+  28 │             - secretRef:
+  29 │                 name: rashmedix-secrets
+  30 └           env:
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): deployment backend in rashmedix namespace is using the default security context, which allows root privileges
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ k8s/helm/rashmedix/templates/backend-deployment.yaml:20-68
+────────────────────────────────────────
+  20 ┌     spec:
+  21 │       containers:
+  22 │         - name: backend
+  23 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  24 │           imagePullPolicy: Always
+  25 │           ports:
+  26 │             - containerPort: 8000
+  27 │           envFrom:
+  28 └             - secretRef:
+  ..   
+────────────────────────────────────────
+
+
+
+k8s/helm/rashmedix/templates/frontend-deployment.yaml (helm)
+============================================================
+Tests: 24 (SUCCESSES: 21, FAILURES: 3)
+Failures: 3 (HIGH: 3, CRITICAL: 0)
+
+KSV-0014 (HIGH): Container 'frontend' of Deployment 'frontend' should set 'securityContext.readOnlyRootFilesystem' to true
+════════════════════════════════════════
+An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+
+See https://avd.aquasec.com/misconfig/ksv-0014
+────────────────────────────────────────
+ k8s/helm/rashmedix/templates/frontend-deployment.yaml:22-45
+────────────────────────────────────────
+  22 ┌         - name: frontend
+  23 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/frontend:v1
+  24 │           imagePullPolicy: Always
+  25 │           ports:
+  26 │             - containerPort: 80
+  27 │           resources:
+  28 │             requests:
+  29 │               cpu: 100m
+  30 └               memory: 128Mi
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): container frontend in rashmedix namespace is using the default security context
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ k8s/helm/rashmedix/templates/frontend-deployment.yaml:22-45
+────────────────────────────────────────
+  22 ┌         - name: frontend
+  23 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/frontend:v1
+  24 │           imagePullPolicy: Always
+  25 │           ports:
+  26 │             - containerPort: 80
+  27 │           resources:
+  28 │             requests:
+  29 │               cpu: 100m
+  30 └               memory: 128Mi
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): deployment frontend in rashmedix namespace is using the default security context, which allows root privileges
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ k8s/helm/rashmedix/templates/frontend-deployment.yaml:20-45
+────────────────────────────────────────
+  20 ┌     spec:
+  21 │       containers:
+  22 │         - name: frontend
+  23 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/frontend:v1
+  24 │           imagePullPolicy: Always
+  25 │           ports:
+  26 │             - containerPort: 80
+  27 │           resources:
+  28 └             requests:
+  ..   
+────────────────────────────────────────
+
+
+
+k8s/manifests/blue-deployment.yaml (kubernetes)
+===============================================
+Tests: 26 (SUCCESSES: 23, FAILURES: 3)
+Failures: 3 (HIGH: 3, CRITICAL: 0)
+
+KSV-0014 (HIGH): Container 'backend' of Deployment 'backend-blue' should set 'securityContext.readOnlyRootFilesystem' to true
+════════════════════════════════════════
+An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+
+See https://avd.aquasec.com/misconfig/ksv-0014
+────────────────────────────────────────
+ k8s/manifests/blue-deployment.yaml:23-73
+────────────────────────────────────────
+  23 ┌         - name: backend
+  24 │           # Blue runs current stable image v1
+  25 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  26 │           imagePullPolicy: Always
+  27 │           ports:
+  28 │             - containerPort: 8000
+  29 │           envFrom:
+  30 │             - secretRef:
+  31 └                 name: rashmedix-secrets
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): container backend-blue in rashmedix namespace is using the default security context
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ k8s/manifests/blue-deployment.yaml:23-73
+────────────────────────────────────────
+  23 ┌         - name: backend
+  24 │           # Blue runs current stable image v1
+  25 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  26 │           imagePullPolicy: Always
+  27 │           ports:
+  28 │             - containerPort: 8000
+  29 │           envFrom:
+  30 │             - secretRef:
+  31 └                 name: rashmedix-secrets
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): deployment backend-blue in rashmedix namespace is using the default security context, which allows root privileges
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ k8s/manifests/blue-deployment.yaml:21-73
+────────────────────────────────────────
+  21 ┌     spec:
+  22 │       containers:
+  23 │         - name: backend
+  24 │           # Blue runs current stable image v1
+  25 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  26 │           imagePullPolicy: Always
+  27 │           ports:
+  28 │             - containerPort: 8000
+  29 └           envFrom:
+  ..   
+────────────────────────────────────────
+
+
+
+k8s/manifests/green-deployment.yaml (kubernetes)
+================================================
+Tests: 24 (SUCCESSES: 21, FAILURES: 3)
+Failures: 3 (HIGH: 3, CRITICAL: 0)
+
+KSV-0014 (HIGH): Container 'backend' of Deployment 'backend-green' should set 'securityContext.readOnlyRootFilesystem' to true
+════════════════════════════════════════
+An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+
+See https://avd.aquasec.com/misconfig/ksv-0014
+────────────────────────────────────────
+ k8s/manifests/green-deployment.yaml:23-74
+────────────────────────────────────────
+  23 ┌         - name: backend
+  24 │           # Green runs new image — same v1 for demo
+  25 │           # In real scenario this would be v2
+  26 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  27 │           imagePullPolicy: Always
+  28 │           ports:
+  29 │             - containerPort: 8000
+  30 │           envFrom:
+  31 └             - secretRef:
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): container backend-green in rashmedix namespace is using the default security context
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ k8s/manifests/green-deployment.yaml:23-74
+────────────────────────────────────────
+  23 ┌         - name: backend
+  24 │           # Green runs new image — same v1 for demo
+  25 │           # In real scenario this would be v2
+  26 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  27 │           imagePullPolicy: Always
+  28 │           ports:
+  29 │             - containerPort: 8000
+  30 │           envFrom:
+  31 └             - secretRef:
+  ..   
+────────────────────────────────────────
+
+
+KSV-0118 (HIGH): deployment backend-green in rashmedix namespace is using the default security context, which allows root privileges
+════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+────────────────────────────────────────
+ k8s/manifests/green-deployment.yaml:21-74
+────────────────────────────────────────
+  21 ┌     spec:
+  22 │       containers:
+  23 │         - name: backend
+  24 │           # Green runs new image — same v1 for demo
+  25 │           # In real scenario this would be v2
+  26 │           image: 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1
+  27 │           imagePullPolicy: Always
+  28 │           ports:
+  29 └             - containerPort: 8000
+  ..   
+────────────────────────────────────────
+
+
+
+k8s/manifests/security-context.yaml (kubernetes)
+================================================
+Tests: 23 (SUCCESSES: 22, FAILURES: 1)
+Failures: 1 (HIGH: 1, CRITICAL: 0)
+
+KSV-0014 (HIGH): Container 'backend' of Deployment 'backend' should set 'securityContext.readOnlyRootFilesystem' to true
+════════════════════════════════════════
+An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+
+See https://avd.aquasec.com/misconfig/ksv-0014
+────────────────────────────────────────
+ k8s/manifests/security-context.yaml:17-26
+────────────────────────────────────────
+  17 ┌         - name: backend
+  18 │           securityContext:
+  19 │             # Prevent privilege escalation
+  20 │             allowPrivilegeEscalation: false
+  21 │             # Read-only root filesystem
+  22 │             readOnlyRootFilesystem: false
+  23 │             # Drop all Linux capabilities
+  24 │             capabilities:
+  25 │               drop:
+  26 └                 - ALL
+────────────────────────────────────────
+
+
+
+main.tf (terraformplan-snapshot)
+================================
+Tests: 8 (SUCCESSES: 0, FAILURES: 8)
+Failures: 8 (HIGH: 4, CRITICAL: 4)
+
+AWS-0039 (HIGH): Cluster does not have secret encryption enabled.
+════════════════════════════════════════
+EKS cluster resources should have the encryption_config block set with protection of the secrets resource.
+
+
+See https://avd.aquasec.com/misconfig/aws-0039
+────────────────────────────────────────
+ main.tf:128-143
+────────────────────────────────────────
+ 128 ┌ resource "aws_eks_cluster" "main" {
+ 129 │   name     = "${var.project}-cluster"
+ 130 │   role_arn = aws_iam_role.eks_cluster.arn
+ 131 │   version  = var.eks_cluster_version
+ 132 │ 
+ 133 │   vpc_config {
+ 134 │     subnet_ids              = concat(aws_subnet.private[*].id, aws_subnet.public[*].id)
+ 135 │     endpoint_private_access = true
+ 136 └     endpoint_public_access  = true
+ ...   
+────────────────────────────────────────
+
+
+AWS-0040 (CRITICAL): Public cluster access is enabled.
+════════════════════════════════════════
+EKS clusters are available publicly by default, this should be explicitly disabled in the vpc_config of the EKS cluster resource.
+
+
+See https://avd.aquasec.com/misconfig/aws-0040
+────────────────────────────────────────
+ main.tf:136
+   via main.tf:133-138 (vpc_config)
+    via main.tf:128-143 (aws_eks_cluster.main)
+────────────────────────────────────────
+ 128   resource "aws_eks_cluster" "main" {
+ ...   
+ 136 [     endpoint_public_access  = true
+ ...   
+ 143   }
+────────────────────────────────────────
+
+
+AWS-0041 (CRITICAL): Cluster allows access from a public CIDR: 0.0.0.0/0
+════════════════════════════════════════
+EKS Clusters have public access cidrs set to 0.0.0.0/0 by default which is wide open to the internet. This should be explicitly set to a more specific private CIDR range
+
+
+See https://avd.aquasec.com/misconfig/aws-0041
+────────────────────────────────────────
+ main.tf:133-138
+   via main.tf:128-143 (aws_eks_cluster.main)
+────────────────────────────────────────
+ 128   resource "aws_eks_cluster" "main" {
+ 129     name     = "${var.project}-cluster"
+ 130     role_arn = aws_iam_role.eks_cluster.arn
+ 131     version  = var.eks_cluster_version
+ 132   
+ 133 ┌   vpc_config {
+ 134 │     subnet_ids              = concat(aws_subnet.private[*].id, aws_subnet.public[*].id)
+ 135 │     endpoint_private_access = true
+ 136 └     endpoint_public_access  = true
+ ...   
+────────────────────────────────────────
+
+
+AWS-0104 (CRITICAL): Security group rule allows unrestricted egress to any IP address.
+════════════════════════════════════════
+Opening up ports to connect out to the public internet is generally to be avoided. You should restrict access to IP addresses or ranges that are explicitly required where possible.
+
+
+See https://avd.aquasec.com/misconfig/aws-0104
+────────────────────────────────────────
+ main.tf:122
+   via main.tf:118-123 (egress)
+    via main.tf:113-126 (aws_security_group.eks_cluster)
+────────────────────────────────────────
+ 113   resource "aws_security_group" "eks_cluster" {
+ ...   
+ 122 [     cidr_blocks = ["0.0.0.0/0"]
+ ...   
+ 126   }
+────────────────────────────────────────
+
+
+AWS-0104 (CRITICAL): Security group rule allows unrestricted egress to any IP address.
+════════════════════════════════════════
+Opening up ports to connect out to the public internet is generally to be avoided. You should restrict access to IP addresses or ranges that are explicitly required where possible.
+
+
+See https://avd.aquasec.com/misconfig/aws-0104
+────────────────────────────────────────
+ main.tf:213
+   via main.tf:209-214 (egress)
+    via main.tf:196-217 (aws_security_group.rds)
+────────────────────────────────────────
+ 196   resource "aws_security_group" "rds" {
+ ...   
+ 213 [     cidr_blocks = ["0.0.0.0/0"]
+ ...   
+ 217   }
+────────────────────────────────────────
+
+
+AWS-0164 (HIGH): Subnet associates public IP address.
+════════════════════════════════════════
+You should limit the provision of public IP addresses for resources. Resources should not be exposed on the public internet, but should have access limited to consumers required for the function of your application.
+
+
+See https://avd.aquasec.com/misconfig/aws-0164
+────────────────────────────────────────
+ main.tf:28
+   via main.tf:23-35 (aws_subnet.public[0])
+────────────────────────────────────────
+  23   resource "aws_subnet" "public" {
+  ..   
+  28 [   map_public_ip_on_launch = true
+  ..   
+  35   }
+────────────────────────────────────────
+
+
+AWS-0164 (HIGH): Subnet associates public IP address.
+════════════════════════════════════════
+You should limit the provision of public IP addresses for resources. Resources should not be exposed on the public internet, but should have access limited to consumers required for the function of your application.
+
+
+See https://avd.aquasec.com/misconfig/aws-0164
+────────────────────────────────────────
+ main.tf:28
+   via main.tf:23-35 (aws_subnet.public[1])
+────────────────────────────────────────
+  23   resource "aws_subnet" "public" {
+  ..   
+  28 [   map_public_ip_on_launch = true
+  ..   
+  35   }
+────────────────────────────────────────
+
+
+AWS-0164 (HIGH): Subnet associates public IP address.
+════════════════════════════════════════
+You should limit the provision of public IP addresses for resources. Resources should not be exposed on the public internet, but should have access limited to consumers required for the function of your application.
+
+
+See https://avd.aquasec.com/misconfig/aws-0164
+────────────────────────────────────────
+ main.tf:28
+   via main.tf:23-35 (aws_subnet.public[2])
+────────────────────────────────────────
+  23   resource "aws_subnet" "public" {
+  ..   
+  28 [   map_public_ip_on_launch = true
+  ..   
+  35   }
+────────────────────────────────────────
+
+

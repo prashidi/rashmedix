@@ -1,17 +1,17 @@
-2026-04-17T21:35:59Z	INFO	[misconfig] Misconfiguration scanning is enabled
-2026-04-17T21:35:59Z	INFO	[checks-client] Need to update the checks bundle
-2026-04-17T21:35:59Z	INFO	[checks-client] Downloading the checks bundle...
-234.65 KiB / 234.65 KiB [------------------------------------------------------] 100.00% ? p/s 100ms2026-04-17T21:36:01Z	INFO	[secret] Secret scanning is enabled
-2026-04-17T21:36:01Z	INFO	[secret] If your scanning is slow, please try '--scanners misconfig' to disable secret scanning
-2026-04-17T21:36:01Z	INFO	[secret] Please see https://trivy.dev/docs/v0.70/guide/scanner/secret#recommendation for faster secret detection
-2026-04-17T21:36:15Z	INFO	[terraform scanner] Scanning root module	file_path="infrastructure/terraform"
-2026-04-17T21:36:15Z	WARN	[terraform parser] Variable values were not found in the environment or variable files. Evaluating may not work correctly.	module="root" variables="db_password, ecr_backend_image, ecr_frontend_image"
-2026-04-17T21:36:16Z	WARN	[pip] Unable to find python `site-packages` directory. License detection is skipped.	err="unable to find path to Python executable"
-2026-04-17T21:36:16Z	INFO	[terraform scanner] Scanning root module	file_path="."
-2026-04-17T21:36:16Z	INFO	[terraform scanner] Scanning root module	file_path="."
-2026-04-17T21:36:16Z	INFO	Suppressing dependencies for development and testing. To display them, try the '--include-dev-deps' flag.
-2026-04-17T21:36:16Z	INFO	Number of language-specific files	num=2
-2026-04-17T21:36:16Z	INFO	Detected config files	num=16
+2026-05-07T22:07:48Z	INFO	[misconfig] Misconfiguration scanning is enabled
+2026-05-07T22:07:48Z	INFO	[checks-client] Need to update the checks bundle
+2026-05-07T22:07:48Z	INFO	[checks-client] Downloading the checks bundle...
+234.65 KiB / 234.65 KiB [------------------------------------------------------] 100.00% ? p/s 100ms2026-05-07T22:07:49Z	INFO	[secret] Secret scanning is enabled
+2026-05-07T22:07:49Z	INFO	[secret] If your scanning is slow, please try '--scanners misconfig' to disable secret scanning
+2026-05-07T22:07:49Z	INFO	[secret] Please see https://trivy.dev/docs/v0.70/guide/scanner/secret#recommendation for faster secret detection
+2026-05-07T22:08:00Z	INFO	[terraform scanner] Scanning root module	file_path="."
+2026-05-07T22:08:00Z	INFO	[terraform scanner] Scanning root module	file_path="."
+2026-05-07T22:08:01Z	WARN	[pip] Unable to find python `site-packages` directory. License detection is skipped.	err="unable to find path to Python executable"
+2026-05-07T22:08:01Z	INFO	[terraform scanner] Scanning root module	file_path="infrastructure/terraform"
+2026-05-07T22:08:01Z	WARN	[terraform parser] Variable values were not found in the environment or variable files. Evaluating may not work correctly.	module="root" variables="db_password, ecr_backend_image, ecr_frontend_image"
+2026-05-07T22:08:01Z	INFO	Suppressing dependencies for development and testing. To display them, try the '--include-dev-deps' flag.
+2026-05-07T22:08:01Z	INFO	Number of language-specific files	num=2
+2026-05-07T22:08:01Z	INFO	Detected config files	num=16
 
 Report Summary
 
@@ -24,7 +24,7 @@ Report Summary
 ├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
 │ .                                                     │ terraformplan-snapshot │    -    │         0         │
 ├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
-│ backend/Dockerfile                                    │       dockerfile       │    -    │         1         │
+│ backend/Dockerfile                                    │       dockerfile       │    -    │         0         │
 ├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
 │ frontend/Dockerfile                                   │       dockerfile       │    -    │         1         │
 ├───────────────────────────────────────────────────────┼────────────────────────┼─────────┼───────────────────┤
@@ -57,20 +57,6 @@ Report Summary
 Legend:
 - '-': Not scanned
 - '0': Clean (no security findings detected)
-
-
-backend/Dockerfile (dockerfile)
-===============================
-Tests: 20 (SUCCESSES: 19, FAILURES: 1)
-Failures: 1 (HIGH: 1, CRITICAL: 0)
-
-DS-0002 (HIGH): Specify at least 1 USER command in Dockerfile with non-root user as argument
-════════════════════════════════════════
-Running containers with 'root' user can lead to a container escape situation. It is a best practice to run containers as non-root users, which can be done by adding a 'USER' statement to the Dockerfile.
-
-See https://avd.aquasec.com/misconfig/ds-0002
-────────────────────────────────────────
-
 
 
 frontend/Dockerfile (dockerfile)

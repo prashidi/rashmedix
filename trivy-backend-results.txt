@@ -1,0 +1,85 @@
+2026-05-07T21:37:11Z	INFO	[vulndb] Need to update DB
+2026-05-07T21:37:11Z	INFO	[vulndb] Downloading vulnerability DB...
+2026-05-07T21:37:11Z	INFO	[vulndb] Downloading artifact...	repo="mirror.gcr.io/aquasec/trivy-db:2"
+9.73 MiB / 92.05 MiB [------>_______________________________________________________] 10.57% ? p/s ?22.31 MiB / 92.05 MiB [-------------->______________________________________________] 24.24% ? p/s ?34.84 MiB / 92.05 MiB [----------------------->_____________________________________] 37.85% ? p/s ?46.89 MiB / 92.05 MiB [------------------------>_______________________] 50.94% 61.85 MiB p/s ETA 0s58.27 MiB / 92.05 MiB [------------------------------>_________________] 63.30% 61.85 MiB p/s ETA 0s70.78 MiB / 92.05 MiB [------------------------------------>___________] 76.89% 61.85 MiB p/s ETA 0s83.37 MiB / 92.05 MiB [------------------------------------------->____] 90.57% 61.78 MiB p/s ETA 0s92.05 MiB / 92.05 MiB [---------------------------------------------->] 100.00% 61.78 MiB p/s ETA 0s92.05 MiB / 92.05 MiB [---------------------------------------------->] 100.00% 61.78 MiB p/s ETA 0s92.05 MiB / 92.05 MiB [---------------------------------------------->] 100.00% 58.72 MiB p/s ETA 0s92.05 MiB / 92.05 MiB [---------------------------------------------->] 100.00% 58.72 MiB p/s ETA 0s92.05 MiB / 92.05 MiB [---------------------------------------------->] 100.00% 58.72 MiB p/s ETA 0s92.05 MiB / 92.05 MiB [---------------------------------------------->] 100.00% 54.93 MiB p/s ETA 0s92.05 MiB / 92.05 MiB [---------------------------------------------->] 100.00% 54.93 MiB p/s ETA 0s92.05 MiB / 92.05 MiB [---------------------------------------------->] 100.00% 54.93 MiB p/s ETA 0s92.05 MiB / 92.05 MiB [---------------------------------------------->] 100.00% 51.39 MiB p/s ETA 0s92.05 MiB / 92.05 MiB [---------------------------------------------->] 100.00% 51.39 MiB p/s ETA 0s92.05 MiB / 92.05 MiB [-------------------------------------------------] 100.00% 27.13 MiB p/s 3.6s2026-05-07T21:37:16Z	INFO	[vulndb] Artifact successfully downloaded	repo="mirror.gcr.io/aquasec/trivy-db:2"
+2026-05-07T21:37:16Z	INFO	[vuln] Vulnerability scanning is enabled
+2026-05-07T21:37:16Z	INFO	[secret] Secret scanning is enabled
+2026-05-07T21:37:16Z	INFO	[secret] If your scanning is slow, please try '--scanners vuln' to disable secret scanning
+2026-05-07T21:37:16Z	INFO	[secret] Please see https://trivy.dev/docs/v0.70/guide/scanner/secret#recommendation for faster secret detection
+2026-05-07T21:37:17Z	INFO	[python] Licenses acquired from one or more METADATA files may be subject to additional terms. Use `--debug` flag to see all affected packages.
+2026-05-07T21:37:19Z	INFO	Detected OS	family="debian" version="13.4"
+2026-05-07T21:37:19Z	INFO	[debian] Detecting vulnerabilities...	os_version="13" pkg_num=97
+2026-05-07T21:37:19Z	INFO	Number of language-specific files	num=1
+2026-05-07T21:37:19Z	INFO	[python-pkg] Detecting vulnerabilities...
+2026-05-07T21:37:19Z	WARN	Using severities from other vendors for some vulnerabilities. Read https://trivy.dev/docs/v0.70/guide/scanner/vulnerability#severity-selection for details.
+
+Report Summary
+
+┌──────────────────────────────────────────────────────────────────────────────────┬────────────┬─────────────────┬─────────┐
+│                                      Target                                      │    Type    │ Vulnerabilities │ Secrets │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ 437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1 (debian 13.4)  │   debian   │        7        │    -    │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ root/.local/lib/python3.12/site-packages/asgiref-3.11.1.dist-info/METADATA       │ python-pkg │        0        │    -    │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ root/.local/lib/python3.12/site-packages/django-6.0.4.dist-info/METADATA         │ python-pkg │        0        │    -    │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ root/.local/lib/python3.12/site-packages/django_cors_headers-4.9.0.dist-info/ME- │ python-pkg │        0        │    -    │
+│ TADATA                                                                           │            │                 │         │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ root/.local/lib/python3.12/site-packages/djangorestframework-3.17.1.dist-info/M- │ python-pkg │        0        │    -    │
+│ ETADATA                                                                          │            │                 │         │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ root/.local/lib/python3.12/site-packages/gunicorn-25.3.0.dist-info/METADATA      │ python-pkg │        0        │    -    │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ root/.local/lib/python3.12/site-packages/packaging-26.1.dist-info/METADATA       │ python-pkg │        0        │    -    │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ root/.local/lib/python3.12/site-packages/psycopg2_binary-2.9.11.dist-info/METAD- │ python-pkg │        0        │    -    │
+│ ATA                                                                              │            │                 │         │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ root/.local/lib/python3.12/site-packages/python_decouple-3.8.dist-info/METADATA  │ python-pkg │        0        │    -    │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ root/.local/lib/python3.12/site-packages/sqlparse-0.5.5.dist-info/METADATA       │ python-pkg │        0        │    -    │
+├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+│ usr/local/lib/python3.12/site-packages/pip-25.0.1.dist-info/METADATA             │ python-pkg │        0        │    -    │
+└──────────────────────────────────────────────────────────────────────────────────┴────────────┴─────────────────┴─────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+
+437932913013.dkr.ecr.eu-west-1.amazonaws.com/rashmedix/backend:v1 (debian 13.4)
+===============================================================================
+Total: 7 (HIGH: 7, CRITICAL: 0)
+
+┌──────────────┬────────────────┬──────────┬──────────┬───────────────────┬───────────────┬─────────────────────────────────────────────────────────────┐
+│   Library    │ Vulnerability  │ Severity │  Status  │ Installed Version │ Fixed Version │                            Title                            │
+├──────────────┼────────────────┼──────────┼──────────┼───────────────────┼───────────────┼─────────────────────────────────────────────────────────────┤
+│ libcap2      │ CVE-2026-4878  │ HIGH     │ affected │ 1:2.75-10+b8      │               │ libcap: libcap: Privilege escalation via TOCTOU race        │
+│              │                │          │          │                   │               │ condition in cap_set_file()                                 │
+│              │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-4878                   │
+├──────────────┼────────────────┤          │          ├───────────────────┼───────────────┼─────────────────────────────────────────────────────────────┤
+│ libncursesw6 │ CVE-2025-69720 │          │          │ 6.5+20250216-2    │               │ ncurses: ncurses: Buffer overflow vulnerability may lead to │
+│              │                │          │          │                   │               │ arbitrary code execution.                                   │
+│              │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-69720                  │
+├──────────────┼────────────────┤          │          ├───────────────────┼───────────────┼─────────────────────────────────────────────────────────────┤
+│ libsystemd0  │ CVE-2026-29111 │          │          │ 257.9-1~deb13u1   │               │ systemd: systemd: Arbitrary code execution or Denial of     │
+│              │                │          │          │                   │               │ Service via spurious IPC...                                 │
+│              │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-29111                  │
+├──────────────┼────────────────┤          │          ├───────────────────┼───────────────┼─────────────────────────────────────────────────────────────┤
+│ libtinfo6    │ CVE-2025-69720 │          │          │ 6.5+20250216-2    │               │ ncurses: ncurses: Buffer overflow vulnerability may lead to │
+│              │                │          │          │                   │               │ arbitrary code execution.                                   │
+│              │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-69720                  │
+├──────────────┼────────────────┤          │          ├───────────────────┼───────────────┼─────────────────────────────────────────────────────────────┤
+│ libudev1     │ CVE-2026-29111 │          │          │ 257.9-1~deb13u1   │               │ systemd: systemd: Arbitrary code execution or Denial of     │
+│              │                │          │          │                   │               │ Service via spurious IPC...                                 │
+│              │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2026-29111                  │
+├──────────────┼────────────────┤          │          ├───────────────────┼───────────────┼─────────────────────────────────────────────────────────────┤
+│ ncurses-base │ CVE-2025-69720 │          │          │ 6.5+20250216-2    │               │ ncurses: ncurses: Buffer overflow vulnerability may lead to │
+│              │                │          │          │                   │               │ arbitrary code execution.                                   │
+│              │                │          │          │                   │               │ https://avd.aquasec.com/nvd/cve-2025-69720                  │
+├──────────────┤                │          │          │                   ├───────────────┤                                                             │
+│ ncurses-bin  │                │          │          │                   │               │                                                             │
+│              │                │          │          │                   │               │                                                             │
+│              │                │          │          │                   │               │                                                             │
+└──────────────┴────────────────┴──────────┴──────────┴───────────────────┴───────────────┴─────────────────────────────────────────────────────────────┘
